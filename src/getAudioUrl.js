@@ -1,6 +1,6 @@
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
-const { request } = require('undici');
+const { request } = require("undici");
 
 module.exports = async function({ songURL }) {
     if (!songURL) throw ("ArgError: songURL field must be defined.");

@@ -4,7 +4,8 @@
   "description": "A simple library to download musics from Chiasenhac.vn",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "lint": "eslint **/**.js"
   },
   "repository": {
     "type": "git",
