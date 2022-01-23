@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/CookieGMVN/csn.js#readme",
   "dependencies": {
-    "axios": "^0.25.0",
-    "jsdom": "^19.0.0"
+    "jsdom": "^19.0.0",
+    "undici": "^4.12.2"
   }
 }
