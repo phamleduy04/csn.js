@@ -1,3 +1,5 @@
-const { getAudioUrl } = require("./src/getAudioUrl")
+const { searchMusic } = require("./src/searchMusic")
+const { getAudioURL } = require("./src/getAudioUrl")
 
-exports.getAudioUrl = getAudioUrl
+exports.searchMusic = searchMusic
+exports.getAudioURL = getAudioURL
