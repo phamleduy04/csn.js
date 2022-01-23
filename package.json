@@ -1,0 +1,29 @@
+{
+  "name": "csn.js",
+  "version": "0.1.0",
+  "description": "A simple library to download musics from Chiasenhac.vn",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CookieGMVN/csn.js.git"
+  },
+  "keywords": [
+    "csn",
+    "chiasenhac",
+    "csn.js",
+    "music"
+  ],
+  "author": "CookieGMVN",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CookieGMVN/csn.js/issues"
+  },
+  "homepage": "https://github.com/CookieGMVN/csn.js#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "jsdom": "^19.0.0"
+  }
+}
