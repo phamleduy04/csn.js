@@ -2,7 +2,7 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const { request } = require('undici');
 
-exports.getAudioURL = async function({ songURL }) {
+module.exports = async function({ songURL }) {
     if (!songURL) throw ("ArgError: songURL field must be defined.");
     if (typeof songURL != "string") throw ("ArgError: songURL field must be a string");
 

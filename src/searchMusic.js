@@ -1,7 +1,7 @@
 const endpoints = require("./endpoint.json");
 const { request } = require('undici');
 
-exports.searchMusic = async function({ name, limit = 5 }) {
+module.exports = async function({ name, limit = 5 }) {
     if (!name) throw ("ArgError: name field is required.");
     if (typeof name != "string") throw ("songName field must be a string.");
     if (limit && limit <= 0) throw ("ArgError: limit field must greater than 0.");
