@@ -11,7 +11,7 @@ yarn add csn.js
 ```
 ## Dependencies Packages
 - jsdom
-- axios
+- undici
 ## Test
 You can test this library by running ``npm test``
 ## API
