@@ -58,13 +58,13 @@ To get a song and get it's Audio URL:
 })
 ```
 ## Contributing
-For more details, please read [CONTRIBUTING.md]("https://github.com/CookieGMVN/csn.js/tree/main/.github/CONTRIBUTING.md")
+For more details, please read [CONTRIBUTING.md](https://github.com/CookieGMVN/csn.js/tree/main/.github/CONTRIBUTING.md)
 ## Contributor
 Thanks for: 
-- Duy Pham Le ([phamleduy04]("https://github.com/phamleduy04"))
+- Duy Pham Le ([phamleduy04](https://github.com/phamleduy04))
 
 (This list may outdated, you can create a pull request to add more contributor :>)
 ## Contact/About Author
-I'm CookieGMVN, you can visit my [GitHub]("https://github.com/CookieGMVN/") and contact with me through Discord: CookieGMVN#9173
+I'm CookieGMVN, you can visit my [GitHub](https://github.com/CookieGMVN/) and contact with me through Discord: CookieGMVN#9173
 
 Thanks for installing and using!
