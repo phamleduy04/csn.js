@@ -37,7 +37,7 @@ You can test this library by running ``npm test``
     const result = await csnjs.getAudioUrl({
         "songURL": songURL
     }) //Output: "AUDIO LINK(MP3 128Kbps)"
-})
+})()
 ```
 ``songURL`` field is required.
 ## Full Usage
@@ -47,15 +47,15 @@ To get a song and get it's Audio URL:
     const csnjs = require("csn.js")
 
     const songName = "Peaches"
-    const searchRes = csnjs.searchMusic({
+    const searchRes = await csnjs.searchMusic({
         name: songName,
         limit: 5
     })
 
-    const audioRes = csnjs.getAudioURL({
+    const audioRes = await csnjs.getAudioURL({
         "songURL": searchRes[0].music_link
     })
-})
+})()
 ```
 ## Contributing
 For more details, please read [CONTRIBUTING.md](https://github.com/CookieGMVN/csn.js/tree/main/.github/CONTRIBUTING.md)
