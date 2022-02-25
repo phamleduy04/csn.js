@@ -4,8 +4,10 @@
         name: "Đế vương",
     });
     const audio = await csnjs.getAudioURL({
-        songURL: result[0].music_link,
+        songURL: 'https://chiasenhac.vn/mp3/dinh-dung-acv/de-vuong-tsv770mtqttn8f.html',
     });
+    const topCharts = await csnjs.getTopCharts();
     console.log(result);
     console.log(audio);
+    console.log(topCharts);
 })();
