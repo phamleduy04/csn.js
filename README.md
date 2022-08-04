@@ -40,7 +40,7 @@ const client = new CSNClient({ cookie: "" });
 })();
 ```
 ``songURL`` field is required.
-```
+
 ## Contributing
 For more details, please read [CONTRIBUTING.md](https://github.com/CookieGMVN/csn.js/tree/main/.github/CONTRIBUTING.md)
 ## Contributor

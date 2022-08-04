@@ -1,7 +1,7 @@
 export class CSNClient {
     constructor({ cookie }: constructorType);
-    public async getAudioUrl({ songURL }: getAudioUrlType): Promise<object>;
-    public async search({ name, limit }: searchType): Promise<Array<searchResultType>>
+    public getAudioUrl({ songUrl }: getAudioUrlType): Promise<object>;
+    public search({ name, limit }: searchType): Promise<Array<searchResultType>>
 }
 
 type constructorType = {
@@ -9,7 +9,7 @@ type constructorType = {
 }
 
 type getAudioUrlType = {
-    songURL: string
+    songUrl: string
 }
 
 type searchType = {
