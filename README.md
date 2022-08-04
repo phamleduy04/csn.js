@@ -17,45 +17,29 @@ You can test this library by running ``npm test``
 ## API
 ### Get songs list by name:
 ```js
-(async () =>{
-    const csnjs = require("csn.js")
+const { CSNClient } = require("csn.js");
 
-    const songName = "Peaches"
-    const result = await csnjs.searchMusic({
-        name: songName,
-        limit: 5
-    }) // Output: [Array]
-})()
+const client = new CSNClient({ cookie: "" });
+
+(async () => {
+    const search = await client.search({ name: "Tình Anh" });
+    console.log(search);
+})();
+
 ```
-``name`` field is required. You can set ``limit`` field from 1 to 6. Default of ``limit`` is 3.
+``name`` field is required. You can set ``limit`` field from 1 to 10. Default of ``limit`` is 5.
 ### Get Audio URL by Music Link:
 ```js
-(async() => {
-    const csnjs = require("csn.js")
+const { CSNClient } = require("csn.js");
 
-    const songURL = "https://chiasenhac.vn/mp3/justin-bieber-daniel-caesar-giveon/peaches-tsvm3vmtq8w28f.html"
-    const result = await csnjs.getAudioUrl({
-        "songURL": songURL
-    }) //Output: "AUDIO LINK(MP3 128Kbps)"
-})()
+const client = new CSNClient({ cookie: "" });
+
+(async () => {
+    const links = await client.getAudioUrl({ songUrl: "https://chiasenhac.vn/mp3/la-phong-lam/lac-chon-hong-tran-tsv6b55tqkqhhf.html" });
+    console.log(links["128"]);
+})();
 ```
 ``songURL`` field is required.
-## Full Usage
-To get a song and get it's Audio URL:
-```js
-(async() => {
-    const csnjs = require("csn.js")
-
-    const songName = "Peaches"
-    const searchRes = await csnjs.searchMusic({
-        name: songName,
-        limit: 5
-    })
-
-    const audioRes = await csnjs.getAudioURL({
-        "songURL": searchRes[0].music_link
-    })
-})()
 ```
 ## Contributing
 For more details, please read [CONTRIBUTING.md](https://github.com/CookieGMVN/csn.js/tree/main/.github/CONTRIBUTING.md)
