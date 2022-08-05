@@ -5,20 +5,20 @@ export class CSNClient {
     public getTopChart(): Promise<topChartData>
 }
 
-type constructorType = {
+interface constructorType {
     cookie: string,
 }
 
-type getAudioUrlType = {
+interface getAudioUrlType {
     songUrl: string
 }
 
-type searchType = {
+interface searchType {
     name: string,
     limit: number | 5
 }
 
-type searchResultType = {
+interface searchResultType {
     songId: number,
     songTitle: string,
     songUrl: string,
@@ -28,19 +28,19 @@ type searchResultType = {
     userDownloaded: number,
 }
 
-type songDownloadData = {
+interface songDownloadData {
     quality: string,
     link: string,
 }
 
-type topChartSongData = {
+interface topChartSongData {
     cover: string,
     name: string,
     author: string,
     songUrl: string
 }
 
-type topChartData = {
+interface topChartData {
     type: "V-POP" | "US-UK" | "C-POP" | "K-POP" | "J-POP" | "France" | "Others",
     data: Array<topChartSongData>,
 }
