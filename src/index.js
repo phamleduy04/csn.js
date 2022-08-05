@@ -19,11 +19,11 @@ class CSNClient {
                 console.log("Warning: If no cookie defined, the maximum quality you can download is 128kbps.");
             }
             if (this.cookie) cookie = this.cookie;
-            if (!songURL) throw new TypeError("`songURL` field must be defined.");
-            if (typeof songURL != "string") throw new TypeError("`songURL` field must be a string");
+            if (!songUrl) throw new TypeError("`songUrl` field must be defined.");
+            if (typeof songUrl != "string") throw new TypeError("`songUrl` field must be a string");
             try {
                 const final = {};
-                const body = await request(encodeURI(songURL), { headers: { Cookie: cookie } }).then(res => res.body.text());
+                const body = await request(encodeURI(songUrl), { headers: { Cookie: cookie } }).then(res => res.body.text());
                 const dom = new JSDOM(body);
                 const linkNList = dom.window.document.querySelectorAll('a.download_item');
                 const links = Array.from(linkNList);
