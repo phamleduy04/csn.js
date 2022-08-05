@@ -1,6 +1,6 @@
 const { CSNClient } = require("./src/index");
 
-const client = new CSNClient({ cookie: "eyJpdiI6IlY2K2FmeVhHNlkyZ3NNZG1DVEpCOFE9PSIsInZhbHVlIjoidFFoVytEcFwvcU9rWE1BNUFka2k4Wms1RDNHYmFPOGJ4TFVDSmNXbVBPT3JaWThKYmFKNEQyU0FCMkF4NUhDUFgiLCJtYWMiOiIyNjI4NjhlY2NkMmIzY2VlMjBjNzUwNTQ5MDA3MDRjMjhiNzU4YWMxMmY1YjI2YzAyYTE3NzExMTBlNzA4ZWExIn0%3D" });
+const client = new CSNClient({ cookie: "" });
 
 (async () => {
     // const search = await client.search({ name: "Tình Anh" });
