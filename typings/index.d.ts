@@ -1,8 +1,16 @@
 export class CSNClient {
     constructor({ cookie }: constructorType);
-    public getAudioUrl({ songUrl }: getAudioUrlType): Promise<Array<songDownloadData>>;
-    public search({ name, limit }: searchType): Promise<Array<searchResultType>>
-    public getTopChart(): Promise<topChartData>
+    public async getAudioUrl({ songUrl }: getAudioUrlType): Promise<Array<songDownloadData>>;
+    public async search({ name, limit, searchType }: searchType): Promise<Array<any>>
+    public async getTopChart(): Promise<topChartData>
+    public async getLyrics(): Promise<string>
+    public async getNextSong(): Promise<Array<nextSongType>>
+    public async getPlaylist(): Promise<string>
+}
+
+interface nextSongType {
+    songName: string;
+    songUrl: string;
 }
 
 interface constructorType {
@@ -15,17 +23,8 @@ interface getAudioUrlType {
 
 interface searchType {
     name: string,
-    limit: number | 5
-}
-
-interface searchResultType {
-    songId: number,
-    songTitle: string,
-    songUrl: string,
-    songArtist: string,
-    userListened: number,
-    coverPicture: string,
-    userDownloaded: number,
+    limit: number | 5,
+    searchType: "music" | "video" | "artist" | "album"
 }
 
 interface songDownloadData {
