@@ -13,11 +13,12 @@ class CSNClient {
         else this.cookie = "";
     }
 
-    async getAudioUrl({ songUrl }) {
+    async getAudioUrl({ songUrl, noWarning = false }) {
         /**
          * @param {songUrl} string
+         * @param {noWarning} boolean
          */
-        if (!this.cookie) {
+        if (!this.cookie && noWarning == false) {
             console.log("Warning: If no cookie defined, the maximum quality you can download is 128kbps.");
         }
         if (!songUrl) throw new TypeError("`songUrl` field must be defined.");
@@ -45,17 +46,15 @@ class CSNClient {
         }
     };
 
-    async search({ name, limit = 5, searchType = null }) {
+    async search({ name, limit = 5, searchType = "music" }) {
         /**
          * @param {name} string
          * @param {limit} number
          * @param {searchType} string
          */
         const final = [];
-        let type;
         if (!searchType) {
-            console.log("`searchType` field is not defined. Using default: music...");
-            type = "music";
+            console.log("`searchType` field is not defined. Will use default value `music`.");
         }
         if (searchType && searchType !== "music" && searchType !== "video" && searchType !== "album" && searchType !== "artist") return TypeError("Invalid value for `searchType`");
         if (!name) throw new TypeError("`name` field must be defined.");
@@ -126,7 +125,7 @@ class CSNClient {
         }
     };
 
-    async getNextSong({ songUrl }) {
+    async getNextSongs({ songUrl }) {
         /**
          * @param {songUrl} string
          */
@@ -183,31 +182,31 @@ class CSNClient {
         }
     }
 
-    async getPlaylist({ playlistUrl }) {
+    async getAlbum({ albumUrl }) {
         /**
-         * @param {playlistUrl} string
+         * @param {albumUrl} string
          */
         if (!this.cookie) {
             console.log("Warning: If no cookie defined, the maximum quality you can download is 128kbps.");
         }
-        if (!playlistUrl) throw new TypeError("`playlistUrl` field must be defined.");
-        if (typeof playlistUrl != "string") throw new TypeError("`playlistUrl` field must be a string");
-        if (!playlistUrl.includes("/nghe-album/")) throw new TypeError("Please provide a valid value for `playlistUrl`!");
-        if (playlistUrl.includes("?playlist=")) playlistUrl = playlistUrl.substring(0, playlistUrl.lastIndexOf("?playlist="));
+        if (!albumUrl) throw new TypeError("`albumUrl` field must be defined.");
+        if (typeof albumUrl != "string") throw new TypeError("`albumUrl` field must be a string");
+        if (!albumUrl.includes("/nghe-album/")) throw new TypeError("Please provide a valid value for `albumUrl`!");
+        if (albumUrl.includes("?playlist=")) albumUrl = albumUrl.substring(0, albumUrl.lastIndexOf("?playlist="));
         try {
             const final = [];
-            const body = await request(encodeURI(playlistUrl), { headers: { Cookie: this.cookie } }).then(res => res.body.text());
+            const body = await request(encodeURI(albumUrl), { headers: { Cookie: this.cookie } }).then(res => res.body.text());
             const dom = new JSDOM(body);
             const linkNList = dom.window.document.querySelectorAll('.card-footer');
             const totalSongs = Array.from(linkNList).length;
             for (let i = 1; i <= totalSongs; i++) {
                 const songData = {};
-                const songBody = await request(encodeURI(playlistUrl + "?playlist=" + i), { headers: { Cookie: this.cookie } }).then(res => res.body.text());
+                const songBody = await request(encodeURI(albumUrl + "?playlist=" + i), { headers: { Cookie: this.cookie } }).then(res => res.body.text());
                 const songDom = new JSDOM(songBody);
                 const songName = songDom.window.document.querySelector("title").text;
                 songData["name"] = songName.substring(0, songName.lastIndexOf("-")).trim();
                 songData["author"] = songName.substring(songName.lastIndexOf("-"), songName.length).replace("-", "").trim();
-                const songLinks = await this.getAudioUrl({ songUrl: encodeURI(playlistUrl + "?playlist=" + i) });
+                const songLinks = await this.getAudioUrl({ songUrl: encodeURI(albumUrl + "?playlist=" + i), noWarning: true });
                 songData["links"] = songLinks;
                 final.push(songData);
             }
@@ -224,7 +223,7 @@ class CSNClient {
          */
         if (!songUrl) throw new TypeError("`songUrl` field must be defined");
         if (typeof songUrl != "string") throw new TypeError("`songUrl` field must be a string");
-        if (!songUrl.includes("/mp3/") || !songUrl.includes("/nghe-album/")) throw new TypeError("Please provide a valid value for `songUrl`!");
+        if (!songUrl.includes("/mp3/") && !songUrl.includes("/nghe-album/")) throw new TypeError("Please provide a valid value for `songUrl`!");
         try {
             const body = await request(encodeURI(songUrl)).then(res => res.body.text());
             const dom = new JSDOM(body);
@@ -235,6 +234,52 @@ class CSNClient {
         }
         catch (err) {
             throw new Error(err);
+        }
+    }
+
+    async getTopCharts() {
+        const dict = {
+            '#cat-3-music': 'V-POP',
+            '#cat-4-music': 'US-UK',
+            '#cat-5-music': 'C-POP',
+            '#cat-6-music': 'K-POP',
+            '#cat-7-music': 'J-POP',
+            '#cat-8-music': 'France',
+            '#cat-9-music': 'Others',
+        };
+
+        const mapRows = (el) => {
+            const obj = {};
+            obj.cover = el.querySelector('div > a > img').getAttribute('src');
+            obj.name = el.querySelector('div > a > img').getAttribute('alt');
+            obj.author = Array.from(el.querySelectorAll('div.author > a')).map(e => e.textContent).join(', ');
+            obj.songURL = el.querySelector('div > ul > li > a').getAttribute('href');
+            return obj;
+        };
+
+        const getTopChart = async (dom, key) => {
+            const linkNList = await dom.window.document.querySelectorAll(`${key} > ul > li`);
+            const links = Array.from(linkNList).map(mapRows);
+            return links;
+        };
+
+        try {
+            const { body } = await request("https://chiasenhac.vn/nhac-hot.html");
+            const dom = new JSDOM(await body.text());
+            const result = [];
+            const keys = Object.keys(dict);
+            for (let i = 0; i < keys.length; i++) {
+                const key = keys[i];
+                const links = await getTopChart(dom, key);
+                result.push({
+                    title: dict[key],
+                    links,
+                });
+            }
+            return result;
+        }
+        catch (err) {
+            throw (err);
         }
     }
 }

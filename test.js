@@ -3,17 +3,27 @@ const { CSNClient } = require("./src/index");
 const client = new CSNClient({ cookie: "" });
 
 (async () => {
-    const search = await client.search({ name: "Em nên dừng lại", searchType: "music" });
-    const links = await client.getAudioUrl({ songUrl: "https://chiasenhac.vn/mp3/tang-duy-tan/ben-tren-tang-lau-tsv6cw6qqkv9ke.html" });
-    const vidLinks = await client.getVideoUrl({ videoUrl: "https://chiasenhac.vn/hd/mom/can-phong-trong-remix-vsv6rwscqka94v.html" });
-    const recommendSong = await client.getNextSong({ songUrl: "https://chiasenhac.vn/mp3/phat-huy-t4/cau-hua-chua-ven-tron-tsv7wtcsqt9fv4.html" });
-    await client.getPlaylist({ playlistUrl: "https://chiasenhac.vn/nghe-album/nua-dem-ngoai-pho-xss6m5tcqk8hfv.html?playlist=1" });
-    console.log(vidLinks);
+    // Test search function
+    const search = await client.search({ name: "Tình anh" });
     console.log(search);
-    console.log(links);
-    console.log(recommendSong);
-    const lyrics = await client.getLyrics({ songUrl: "https://chiasenhac.vn/mp3/jack-j97/ngoi-sao-co-don-tsv6mt36qk8fwk.html" });
-    console.log(lyrics);
-    const playlist = await client.getPlaylist({ playlistUrl: "https://chiasenhac.vn/nghe-album/nguoi-tinh-mua-dong-wrc-remix-single-xss6m60vqk8kn2.html" });
-    console.log(playlist);
+    // Test get audio link function
+    const audioLinks = await client.getAudioUrl({ songUrl: "https://chiasenhac.vn/mp3/dinh-dung-acv/tinh-anh-tsvwsm76q948tk.html" });
+    console.log(audioLinks);
+    // Test get next song function
+    const nextSongs = await client.getNextSongs({ songUrl: "https://chiasenhac.vn/mp3/dinh-dung-acv/tinh-anh-tsvwsm76q948tk.html" });
+    console.log(nextSongs);
+    // Test get video link function
+    const videoLinks = await client.getVideoUrl({ videoUrl: "https://chiasenhac.vn/hd/dinh-dung/tinh-anh-vsvm3cdmq8wvm8.html" });
+    console.log(videoLinks);
+    // Test get top charts function
+    const topCharts = await client.getTopCharts();
+    console.log(topCharts);
+    // Test get playlist function
+    const albumLinks = await client.getAlbum({ albumUrl: "https://chiasenhac.vn/nghe-album/tinh-anh-single-xss6drswqkma49.html" });
+    console.log(albumLinks);
+    // Test get lyrics function
+    const songLyrics = await client.getLyrics({ songUrl: "https://chiasenhac.vn/mp3/dinh-dung-acv/tinh-anh-tsvwsm76q948tk.html" });
+    console.log(songLyrics);
+    // Test done
+    console.log("Test process is done.");
 })();
