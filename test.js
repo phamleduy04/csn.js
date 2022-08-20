@@ -6,7 +6,7 @@ const client = new CSNClient({ cookie: "" });
     const search = await client.search({ name: "Em nên dừng lại", searchType: "music" });
     const links = await client.getAudioUrl({ songUrl: "https://chiasenhac.vn/mp3/tang-duy-tan/ben-tren-tang-lau-tsv6cw6qqkv9ke.html" });
     const vidLinks = await client.getVideoUrl({ videoUrl: "https://chiasenhac.vn/hd/mom/can-phong-trong-remix-vsv6rwscqka94v.html" });
-    const recommendSong = await client.getRecommendSong({ songUrl: "https://chiasenhac.vn/mp3/phat-huy-t4/cau-hua-chua-ven-tron-tsv7wtcsqt9fv4.html" });
+    const recommendSong = await client.getNextSong({ songUrl: "https://chiasenhac.vn/mp3/phat-huy-t4/cau-hua-chua-ven-tron-tsv7wtcsqt9fv4.html" });
     const topChart = await client.getTopChart();
     await client.getPlaylist({ playlistUrl: "https://chiasenhac.vn/nghe-album/nua-dem-ngoai-pho-xss6m5tcqk8hfv.html?playlist=1" });
     console.log(vidLinks);
