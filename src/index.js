@@ -85,9 +85,9 @@ class CSNClient {
                     final.push({
                         videoId: val.video_id,
                         videoTitle: val.video_title,
-                        songUrl: val.video_link,
+                        videoUrl: val.video_link,
                         videoArtist: val.video_artist,
-                        userListened: val.video_listen,
+                        userWatched: val.video_listen,
                         coverPicture: val.video_cover,
                         userDownloaded: val.video_downloads,
                         videoLength: val.video_length_html,
